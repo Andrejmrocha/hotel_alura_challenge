@@ -25,9 +25,13 @@ public class ReservaController {
 		return this.reservaDAO.buscarPorNumero(id);
 	}
 
-	public void atualizar(Reserva reservaAtualizada, String string) {
-		this.reservaDAO.atualizar(reservaAtualizada, string);
+	public void atualizar(String dado, String id, int coluna) {
+		this.reservaDAO.atualizar(dado, id, coluna);
 		
+	}
+	
+	public void excluirDados(String id, int coluna) {
+		this.reservaDAO.excluirDados(id, coluna);
 	}
 	
 }

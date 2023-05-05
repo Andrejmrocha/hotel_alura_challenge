@@ -1,9 +1,30 @@
 package views;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.TimeZone;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -11,28 +32,6 @@ import controller.HospedeController;
 import controller.ReservaController;
 import model.Hospede;
 import model.Reserva;
-
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.ImageIcon;
-import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.Font;
-import javax.swing.JTabbedPane;
-import java.awt.Toolkit;
-import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-import javax.swing.ListSelectionModel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.List;
 
 @SuppressWarnings("serial")
 public class Buscar extends JFrame {
@@ -277,6 +276,17 @@ public class Buscar extends JFrame {
 		btnDeletar.setBackground(new Color(12, 138, 199));
 		btnDeletar.setBounds(767, 508, 122, 35);
 		btnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+		btnDeletar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(panel.getSelectedIndex() == 0) {
+					excluirDadosReserva();
+				}
+				else if(panel.getSelectedIndex() == 1) {
+					excluirDadosHospede();
+				}
+			}
+		});
 		contentPane.add(btnDeletar);
 		
 		JLabel lblExcluir = new JLabel("DELETAR");
@@ -344,13 +354,14 @@ public class Buscar extends JFrame {
 		 if(tbReservas.isEditing()) {
 			 tbReservas.getCellEditor().stopCellEditing();
 		 }
+		 int coluna = tbReservas.getSelectedColumn();
+		 int linha = tbReservas.getSelectedRow();
+		 String id = modelo.getDataVector().get(0).get(0).toString();
+		 String dado = tbReservas.getValueAt(linha, coluna).toString();
 		 
-		 Date dataEntrada = stringToSQLDate(modelo.getDataVector().get(0).get(1).toString());
-		 Date dataSaida = stringToSQLDate(modelo.getDataVector().get(0).get(2).toString());
-		 String valor = modelo.getDataVector().get(0).get(3).toString();
-		 String formaPagamento = modelo.getDataVector().get(0).get(4).toString();
-		 Reserva reservaAtualizada = new Reserva(dataEntrada, dataSaida, valor, formaPagamento);
-		 reservaController.atualizar(reservaAtualizada, modelo.getDataVector().get(0).get(0).toString());
+
+
+		 reservaController.atualizar(dado, id, coluna);
 		 JOptionPane.showMessageDialog(null, "Reserva atualizada");
 	 }
 	 
@@ -359,29 +370,34 @@ public class Buscar extends JFrame {
 			 tbHospedes.getCellEditor().stopCellEditing();
 		 }
 		 
-		 String nome = modeloHospedes.getDataVector().get(0).get(1).toString();
-		 String sobrenome = modeloHospedes.getDataVector().get(0).get(2).toString();
-		 Date dataNascimento = stringToSQLDate(modeloHospedes.getDataVector().get(0).get(3).toString());
-		 String nacionalidade = modeloHospedes.getDataVector().get(0).get(4).toString();
-		 String telefone = modeloHospedes.getDataVector().get(0).get(5).toString();
-		 
-		 Hospede hospedeAtualizado = new Hospede(nome, sobrenome, dataNascimento, nacionalidade, telefone);
-		 hospedeController.atualizar(hospedeAtualizado, modeloHospedes.getDataVector().get(0).get(0).toString());
+		 int coluna = tbHospedes.getSelectedColumn();
+		 int linha = tbHospedes.getSelectedRow();
+		 String id = modeloHospedes.getDataVector().get(0).get(0).toString();
+		 String dado = tbHospedes.getValueAt(linha, coluna).toString();
+
+
+		 hospedeController.atualizar(dado, id, coluna);
 		 JOptionPane.showMessageDialog(null, "Hospede atualizado");
 	 }
 	 
-	 private Date stringToSQLDate(String data) {
-		 String dataEntradaString = data;
-		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		 java.util.Date dateEntrada = null;
-		try {
-			dateEntrada = sdf.parse(dataEntradaString);
-		} catch (ParseException e) {
-			JOptionPane.showMessageDialog(null, "Erro na conversão de data: " + data);
-			new RuntimeException(e);
-		}
-		 java.sql.Date dateEntradaSQL = new java.sql.Date(dateEntrada.getTime());
-		 return dateEntradaSQL;
+	 
+	 private void excluirDadosReserva() {
+		 int coluna = tbReservas.getSelectedColumn();
+		 int linha = tbReservas.getSelectedRow();
+		 String id = modelo.getDataVector().get(0).get(0).toString();
+
+		 reservaController.excluirDados(id, coluna);
+		 JOptionPane.showMessageDialog(null, "Reserva atualizada");
+		 
+	 }
+	 
+	 private void excluirDadosHospede() {
+		 int coluna = tbHospedes.getSelectedColumn();
+		 int linha = tbHospedes.getSelectedRow();
+		 String id = modeloHospedes.getDataVector().get(0).get(0).toString();
+
+		 hospedeController.excluirDados(id, coluna);
+		 JOptionPane.showMessageDialog(null, "Hóspede atualizada");
 	 }
 	 
 	 

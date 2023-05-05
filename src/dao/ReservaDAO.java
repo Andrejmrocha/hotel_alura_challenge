@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -67,22 +68,73 @@ public class ReservaDAO {
 		}
 	}
 	
-	public void atualizar(Reserva reserva, String id) {
+	public void atualizar(String dado, String id, int coluna) {
 		try {
-			String sql = "UPDATE reservas SET data_entrada = ?, data_saida = ?, valor = ?,"
-					+ "forma_pagamento = ? WHERE id = ?";
+			String sql = null;
 			
-			try(PreparedStatement pst = connection.prepareStatement(sql)){
-				pst.setDate(1, reserva.getDataEntrada());
-				pst.setDate(2, reserva.getDataSaida());
-				pst.setString(3, reserva.getValor());
-				pst.setString(4, reserva.getFormaPagamento());
-				pst.setString(5, id);
-				
-				pst.execute();
+			switch(coluna) {
+			case 1:
+				sql = "UPDATE reservas SET data_entrada = ? WHERE id = ?";
+				break;
+			
+			case 2:
+				sql = "UPDATE reservas SET data_saida = ? WHERE id = ?";
+				break;
+			
+			case 3:
+				sql = "UPDATE reservas SET valor = ? WHERE id = ?";
+				break;
+			
+			case 4:
+				sql = "UPDATE reservas SET forma_pagamento = ? WHERE id = ?";
+				break;
+			}
+			try(PreparedStatement pst = connection.prepareStatement(sql)) {
+				if(dado.contains("-")) {
+					Date data = Date.valueOf(dado);
+					pst.setDate(1, data);
+					pst.setString(2, id);
+					pst.execute();
+				} else {
+					pst.setString(1, dado);
+					pst.setString(2, id);
+					pst.execute();
+				}
 			}
 		}catch(SQLException e) {
 			throw new RuntimeException(e);
+		}
+	}
+	
+	public void excluirDados(String id, int coluna) {
+		try {
+			String sql = null;
+			switch(coluna) {
+			case 1:
+				sql = "UPDATE reservas SET data_entrada = NULL WHERE id = ?";
+				break;
+				
+			case 2:
+				sql = "UPDATE reservas SET data_saida = NULL WHERE id = ?";
+				break;
+				
+			case 3:
+				sql = "UPDATE reservas SET valor = NULL WHERE id = ?";
+				break;
+				
+			case 4:
+				sql = "UPDATE reservas SET forma_pagamento = NULL WHERE id = ?";
+				break;
+			}
+			
+			
+			try(PreparedStatement pst = connection.prepareStatement(sql)) {
+				pst.setString(1, id);
+				pst.execute();
+			}
+		}catch(SQLException e) {
+			throw new RuntimeException("Erro ao excluir reserva " + e);
+			
 		}
 	}
 	
