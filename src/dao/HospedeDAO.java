@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,23 +62,82 @@ public class HospedeDAO {
 		}
 	}
 
-	public void atualizar(Hospede hospede, String id) {
+	public void atualizar(String dado, String id, int coluna) {
 		try {
-			String sql = "UPDATE hospedes SET nome = ?, sobrenome = ?, data_nascimento = ?,"
-					+ " nacionalidade = ?, telefone = ? WHERE id = ?";
+			String sql = null;
 			
-			try(PreparedStatement pst = connection.prepareStatement(sql)){
-				pst.setString(1, hospede.getNome());
-				pst.setString(2, hospede.getSobrenome());
-				pst.setDate(3, hospede.getDataNascimento());
-				pst.setString(4, hospede.getNacionalidade());
-				pst.setString(5, hospede.getTelefone());
-				pst.setString(6, id);
-				pst.execute();
+			switch(coluna) {
+			case 1:
+				sql = "UPDATE hospedes SET nome = ? WHERE id = ?";
+				break;
+			
+			case 2:
+				sql = "UPDATE hospedes SET sobrenome = ? WHERE id = ?";
+				break;
+			
+			case 3:
+				sql = "UPDATE hospedes SET data_nascimento = ? WHERE id = ?";
+				break;
+			
+			case 4:
+				sql = "UPDATE hospedes SET nacionalidade = ? WHERE id = ?";
+				break;
+				
+			case 5:
+				sql = "UPDATE hospedes SET telefone = ? WHERE id = ?";
+				break;
+			}
+			try(PreparedStatement pst = connection.prepareStatement(sql)) {
+				if(dado.contains("-")) {
+					Date data = Date.valueOf(dado);
+					pst.setDate(1, data);
+					pst.setString(2, id);
+					pst.execute();
+				} else {
+					pst.setString(1, dado);
+					pst.setString(2, id);
+					pst.execute();
+				}
 			}
 		}catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
 		
+	}
+	
+	public void excluirDados(String id, int coluna) {
+		try {
+			String sql = null;
+			switch(coluna) {
+			case 1:
+				sql = "UPDATE hospedes SET nome = NULL WHERE id = ?";
+				break;
+				
+			case 2:
+				sql = "UPDATE hospedes SET sobrenome = NULL WHERE id = ?";
+				break;
+				
+			case 3:
+				sql = "UPDATE hospedes SET data_nascimento = NULL WHERE id = ?";
+				break;
+				
+			case 4:
+				sql = "UPDATE hospedes SET nacionalidade = NULL WHERE id = ?";
+				break;
+				
+			case 5:
+				sql = "UPDATE hospedes SET telefone = NULL WHERE id = ?";
+				break;
+			}
+			
+			
+			try(PreparedStatement pst = connection.prepareStatement(sql)) {
+				pst.setString(1, id);
+				pst.execute();
+			}
+		}catch(SQLException e) {
+			throw new RuntimeException("Erro ao excluir hóspede " + e);
+			
+		}
 	}
 }

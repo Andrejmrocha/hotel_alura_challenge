@@ -26,20 +26,12 @@ private HospedeDAO hospedeDAO;
 		return this.hospedeDAO.buscarPorSobrenome(sobrenome);
 	}
 
-	public void atualizar(Hospede hospede, String id) {
-		this.hospedeDAO.atualizar(hospede, id);
+	public void atualizar(String dado, String id, int coluna) {
+		this.hospedeDAO.atualizar(dado, id, coluna);
 		
 	}
 	
-//	public List<Hospede> buscar(){
-//		return this.hospedeDAO.buscar();
-//	}
-//	
-//	public List<Hospede> buscarPorId(String id){
-//		return this.hospedeDAO.buscarPorId(id);
-//	}
-//	
-//	public void deletar(Integer id) {
-//		this.hospedeDAO.deletar(id);
-//	}
+	public void excluirDados(String id, int coluna) {
+		this.hospedeDAO.excluirDados(id, coluna);
+	}
 }
