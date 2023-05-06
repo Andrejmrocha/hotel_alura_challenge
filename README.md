@@ -22,7 +22,7 @@
 - [Importante](#importante)
 - [Banco de dados](#bd)
 - [Screenshots](#screenshots)
-- [Tecnologias]("#tecnologias")
+- [Tecnologias](#tecnologias)
 - [Autor](#autor)
 
 ## 🧐 Sobre <a name = "sobre"></a>
