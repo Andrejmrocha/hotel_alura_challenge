@@ -126,10 +126,10 @@ Em seguida, clique no botão <em>Browse</em> e busque o projeto no diretório lo
 
 ## 📸 Screenshots <a name="screenshots"></a>
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./imagens/bemVindo.png" />
+  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./imagens/login.png" />
 </h1>
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./imagens/login.png" />
+  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./imagens/bemVindo.png" />
 </h1>
 <h1 align="center">
   <img alt="NextLevelWeek" title="#NextLevelWeek" src="./imagens/registroReserva.png" />
@@ -156,6 +156,6 @@ Em seguida, clique no botão <em>Browse</em> e busque o projeto no diretório lo
 - [@Andrejmrocha](https://github.com/Andrejmrocha) - Desenvolvimento back-end
 
 
-<h5><a href="https://www.linkedin.com/in/andrejrocha/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
-"/></a></h5>
+<a href="https://www.linkedin.com/in/andrejrocha/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
+"/></a>
 
