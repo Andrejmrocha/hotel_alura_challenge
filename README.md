@@ -156,5 +156,5 @@ Em seguida, clique no botão <em>Browse</em> e busque o projeto no diretório lo
 - [@Andrejmrocha](https://github.com/Andrejmrocha) - Desenvolvimento back-end
 
 
-![image]("https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white")
+<img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
 
