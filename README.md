@@ -128,22 +128,22 @@ Em seguida, clique no botão <em>Browse</em> e busque o projeto no diretório lo
 
 ## 📸 Screenshots <a name="screenshots"></a>
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./imagens/login.png" />
+  <img alt="NextLevelWeek" title="#Login" src="./imagens/login.png" />
 </h1>
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./imagens/bemVindo.png" />
+  <img alt="NextLevelWeek" title="#BemVindo" src="./imagens/bemVindo.png" />
 </h1>
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./imagens/registroReserva.png" />
+  <img alt="NextLevelWeek" title="#registroReserva" src="./imagens/registroReserva.png" />
 </h1>
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./imagens/registroHospede.png" />
+  <img alt="NextLevelWeek" title="#registroHospede" src="./imagens/registroHospede.png" />
 </h1>
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./imagens/buscaReserva.png" />
+  <img alt="NextLevelWeek" title="#buscaReserva" src="./imagens/buscaReserva.png" />
 </h1>
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./imagens/buscaHospede.png" />
+  <img alt="NextLevelWeek" title="#buscaHospede" src="./imagens/buscaHospede.png" />
 </h1>
 
 ## ⛏️ Tecnologias <a name = "tecnologias"></a>
